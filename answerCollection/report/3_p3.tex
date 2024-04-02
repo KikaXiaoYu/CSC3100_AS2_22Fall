@@ -1,0 +1,15 @@
+\section{Sierpiński carpet}
+This problem asks to print out the Sierpiński carpet of size $3
+^k \times 3^k$. The source code is in A2\_P3\_121090642.cpp
+
+The core thing to do is to judge an index is whether needed to be removed or not. For each index, we use a function \textbf{whetherRemove(idxrow, idxcol,  rmsize, rmrow, rmcol) }, where
+~\\
+1. idxrow and idxcol represents the index we are going to judge,
+~\\
+2. rmsize represents now which size of square we want to remove
+~\\
+3. rmrow and rmcol represents the index of the square we want to remove starts
+
+to judge whether the current index is in this remove square, hence need to be removed. If yes, return True; else, if the rmsize > 1, it will also cause 8 smaller square also need to be removed. However, we do not need to see all of them, we use an algorithm to find the smaller square which has the smallest distance to the current index, i.e. we get newRmsize, newRmrow, newRmcol, then we do \textbf{whetherRemove(idxrow, idxcol, newRmsize, newRmrow, newRmcol) } recursively unitl newRmsize < 1. If now the index is still not in remove square, we output “$\#$”, otherwise “ ”. 
+
+Since the newRmsize = rmsize / 3, we have a recursion T(n) = T(n/3) + O(1), hence the final time complexity of the whole program is O(log(n))

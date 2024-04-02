@@ -1,0 +1,28 @@
+new_node:
+idx(0) value(1)
+Finish inserting!
+
+tree.getSize: 1
+cur_idx: 1
+new_node:
+idx(1) value(2)
+Finish inserting!
+
+tree.getSize: 2
+cur_idx: 2
+new_node:
+idx(2) value(3)
+Finish inserting!
+
+tree.getSize: 3
+cur_idx: 3
+new_node:
+idx(3) value(4)
+Finish inserting!
+
+tree.getSize: 4
+printTree(cur_node_p->getLeft())
+0
+-1291848016
+printTree(cur_node_p->getRight())
+printTree(cur_node_p->getLeft())
