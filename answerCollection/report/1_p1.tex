@@ -1,0 +1,17 @@
+
+
+\section{02 Representaion}
+This problem asks to turn a number n into 02 representation. The source code is in A2\_P1\_121090642.py
+
+Since each positive integer n corresponds to a unique binary representation, the first important thing is to represent n in binary form. In order to do further recursion, we can use function \textbf{getBiPowLst(n)} to return the binary representation list \textbf{powlst} in a power form (e.g. 137 -> [7, 3, 0]).
+
+For each element \textbf{b} in this \textbf{powlst},  If \textbf{b} is not in binary form, we recursively do \textbf{getBiPowLst(b)} and use correct rules to put brackets until every digit used to represent the number is in binary form. And we store the result as a string \textbf{res}.
+
+For example, getBiPowLst(7) = [2, 1, 0], then we store “2(2(2)+2+2(0))”; getBiPowLst(3) = [1, 0], then we store “2(2+2(0))”; 0 is a 02 representation, so we simply store "2(0)"; we put them together to get “2(2(2)+2+2(0))+2(2+2(0))+2(0)” and we output it.
+
+Finally, \textbf{res} can be the 02 representation of number \textbf{n}.
+
+For the function getBiPowLst(n), the time complexity is O(log(n)) because we divide the number n by 2 each time.
+
+For the whole program, for the number n, we can find $2^k$ > n, then k = O(log(n)), hence the recursion can be T(n) = T(log(n)) + O(log(n)), then the final time complexity is O(log(n))
+
