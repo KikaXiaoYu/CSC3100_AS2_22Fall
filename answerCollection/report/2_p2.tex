@@ -1,0 +1,11 @@
+
+\section{Crossing}
+This problem asks to get the maximum number of crossings. The source code is in A2\_P2\_121090642.py
+
+Since the crossing occurs when i < j, A[i] $\leq$ A[j], then the problem can be turned into another problem: given an array, find out the maximum number of pairs such that i < j, A[i] $\leq$ A[j].
+
+We can use merge sort to help solving the problem. Each time when we compare and put the elements from old array A into a new array B, we focus on such pairs, and record it.
+
+After sorting, all the pairs can be recorded, and we output the result.
+
+Since this solution is based on merge sort, and the time complexity of comparing is constant, hence the final time complexity for the whole program is O(log(n)). It is much faster than some sorting like bubble sort or insertion sort.

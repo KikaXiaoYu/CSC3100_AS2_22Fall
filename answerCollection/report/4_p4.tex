@@ -1,0 +1,69 @@
+\section{Array Maintenance}
+This problem asks to maintenance an array, which can do the inserting, deleting, and sum calculating operations. The source code is in A2\_P4\_121090642.py
+
+If we use simple array, the time complexity is commonly O(n), However, we can use tree to reach O(log(n)).
+
+Firstly, we define our tree \textbf{Node} which will be like Node(value, left, right, parent, leftElement, rightElement, leftSum, rightSum), where
+~\\
+1. value: is just the value
+~\\
+2. left: the left child of the node, also a node
+~\\
+3. right: the right child of the node, also a node
+~\\
+4. leftElement: the total number of the nodes at left
+~\\
+5. rightElement: the total number of the nodes at right
+~\\
+6. leftSum: the total sum of all the nodes at left
+~\\
+7. rightSum: the total sum of all the nodes at right
+
+Secondly, we need some basic information and operations in \textbf{Tree},
+~\\
+1. h: the height of the tree, expected to O(log(n))
+~\\
+2. precessor: find the precessor of the node
+~\\
+3. successor: find the successor of the node
+~\\
+4. findMinNodeByRoot: find the minimun node from node
+~\\
+5. findMaxNodeByRoot: find the maximun node from node
+
+\subsection{Inserting}
+This operation insert a node with value after the kth element.
+
+We start from root of the tree, say pivot. If tree.leftElement < k, which means that the node should be inserted at right of the pivot, then pivot.rightElement should plus 1 and pivot.rightSum should plus value. 
+
+After this, pivot = pivot.right, else pivot = pivot.left. If k > tree.leftElement, we need to say the node has been put after some nodes, hence we get the curK, which should be equal to (curK - k), which will be used for judgement of further right. 
+
+Continuously do this operation, we get the pivot == None, which is our target, to insert the node.
+
+Since the each time the node goes deeper, the time complexity is O(h), where h is the height of the tree, namely, O(log(n)).
+
+\subsection{Deleting}
+This operation deletes a node which is the kth element.
+
+We use similar method in insertion to get the node we want to delete, and now the terminating condition is not node == None but node.leftElement = k.
+
+If this node has no child, then everything goes well, we just let its parent's one child to be None.
+
+If this node has only left child, then we join the node and its left child' child. For only right child, we do something similar.
+
+*Note: For all the situations above, we need to back from this node to the root, and deduce the leftElement, leftSum, rightElement, rightSum according to the correct situation.
+
+If this node has both left and right children, we need to find the successor of the node, then renew the value of node, be careful here we still need to need to back from this node to the root, and deduce the leftElement, leftSum, rightElement, rightSum based on the difference between the old node and new one. After this, we delete the successor node using method above or recursively.
+
+Since finding the successor requires O(h), and the backing operation requires O(h), we claim that the time complexity is O(h), namely, O(log(n)).
+
+\subsection{Calculating the sum}
+This operation calculating the sum from the rth element to the rth element.
+
+We use similar method in deleting to get the node of rth and kth element. If we can calculate the sum from 1th to mth element, then do the difference, we can get the result, namely, $Sum(l, r) = Sum(0, r) - Sum(0,l-1)$
+
+For one node, we first get the leftSum of the node, then we use function findMinNodeByRoot to get the minimun node, the leftSum is obviously the sum from the minimun node to this node.
+
+Then we find the precessor of the minimun node, continuously do the operation until the precessor == None. Finally the result can be calculated.
+
+Since finding the precessor requires O(h), and the worse case of the times of finding the precessor is O(h), we have the time complexity is O(h$^2$), namely O(log$^2$(n)).
